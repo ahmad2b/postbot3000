@@ -1,0 +1,20 @@
+name: postbot3000
+services:
+  postbot3000:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    networks:
+      - postbot3000_network
+
+volumes:
+  postbot3000:
+    driver: local
+
+networks:
+  postbot3000_network:
+    driver: bridge
