@@ -41,13 +41,6 @@ export const metadata = {
   }
 }
 
-export const viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' }
-  ]
-}
-
 interface RootLayoutProps {
   children: React.ReactNode
 }
@@ -68,7 +61,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers
           attribute="class"
           defaultTheme="light"
-          enableSystem
           disableTransitionOnChange
         >
           <Toaster
