@@ -208,7 +208,7 @@ export async function savePost(post: ContentPost) {
     return { error: 'Unauthorized' }
   }
 
-  const postId = `post:${Date.now()}` // Generate a unique post ID
+  const postId = post.artifactId
 
   const payload = {
     draft: post.draft,
@@ -290,6 +290,8 @@ export async function updatePost(
 }
 
 export async function removePost(postId: string, userId: string) {
+  console.log('removePost', postId, userId)
+
   const { userId: session } = auth()
   const user = await currentUser()
 
@@ -346,4 +348,31 @@ export async function getPostsByUser(
   } catch (error) {
     return []
   }
+}
+
+export async function deleteAllPostsByUser() {
+  const { userId: session } = auth()
+  const user = await currentUser()
+
+  if (!session || !user) {
+    return { error: 'Unauthorized' }
+  }
+
+  const postIds: string[] = await redis.zrange(`user:posts:${user.id}`, 0, -1)
+
+  if (!postIds.length) {
+    return { success: true, message: 'No posts to delete' }
+  }
+
+  const pipeline = redis.pipeline()
+
+  for (const postId of postIds) {
+    pipeline.del(postId)
+  }
+
+  pipeline.del(`user:posts:${user.id}`)
+
+  await pipeline.exec()
+
+  return { success: true, message: 'All posts deleted successfully' }
 }

@@ -1,3 +1,4 @@
+import { getPostsByUser } from '@/app/actions'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -11,7 +12,7 @@ import { auth } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { getPostsByUser } from '../../actions'
+import { DeleteDraftButton } from './delete-draft'
 
 const DraftsPage = async () => {
   const { userId } = auth()
@@ -38,28 +39,33 @@ const DraftsPage = async () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 pt-4 md:pt-8">
         {response.map((post, idx) => (
-          <Card key={idx}>
+          <Card key={idx} className="flex flex-col">
             <CardHeader>
               <CardTitle>
-                <Button variant={'ghost'} size={'icon'} className="size-20">
-                  <Image
-                    src={
-                      post.platform === 'Twitter'
-                        ? '/twitter.svg'
-                        : '/linkedin.svg'
-                    }
-                    alt={post.platform + ' logo'}
-                    width={80}
-                    height={80}
-                  />
-                </Button>
+                <div
+                  className={'flex items-center justify-between group/draft'}
+                >
+                  <Button variant={'ghost'} size={'icon'} className="size-20">
+                    <Image
+                      src={
+                        post.platform === 'Twitter'
+                          ? '/twitter.svg'
+                          : '/linkedin.svg'
+                      }
+                      alt={post.platform + ' logo'}
+                      width={80}
+                      height={80}
+                    />
+                  </Button>
+                </div>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className=" line-clamp-3">{post.draft}</p>
             </CardContent>
-            <CardFooter>
-              <div className="flex justify-end items-end w-full">
+            <CardFooter className="mt-auto">
+              <div className="flex justify-end items-end w-full gap-4">
+                <DeleteDraftButton draftId={post.artifactId} userId={userId} />
                 <Link
                   href={`/chat/${post.chatId}?artifactId=${post.artifactId}`}
                   className={cn(buttonVariants({}))}
