@@ -2,7 +2,7 @@
 
 Try it out: [PostBot 3000](https://postbot3000.vercel.app/)
 
-PostBot 3000 is an AI-powered social media AI Agent that generates, and posts high-quality content across X (formerly Twitter) and LinkedIn. Leveraging `LangGraph` and the `OpenAI` API, it transforms technical content into engaging posts, providing platform-specific edits and constructive feedback to enhance your social media strategy.
+PostBot 3000 is an `open-source` project that shows how to build a powerful AI agent and stream responses and generate artifacts. This project makes it easier for anyone looking to implement similar solutions.
 
 ## Features
 
