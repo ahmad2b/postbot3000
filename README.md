@@ -77,6 +77,20 @@ pnpm dev
 
 ---
 
+## Community & Connect
+
+I'm excited to see this project helping developers build better AI agents! If you're exploring AI agents or building something exciting, I'd love to hear about your journey.
+
+Find me around the web:
+
+- 📧 Email: ahmadshaukat_4@outlook.com
+- 📍 LinkedIn: [ahmad2b](https://www.linkedin.com/in/ahmad2b)
+- 🐦 Twitter: [@mahmad2b](https://x.com/mahmad2b)
+
+If this project helped your development journey, consider giving it a ⭐ to help others find it!
+
+---
+
 #### Inspiration
 
 - Agent UI: [Vercel Template](https://vercel.com/templates/next.js/nextjs-ai-chatbot)
